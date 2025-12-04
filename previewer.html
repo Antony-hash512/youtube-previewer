@@ -1,106 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<style>
-    body { background-color: #0f0f0f; color: white; font-family: Roboto, Arial, sans-serif; padding: 20px; }
-    .controls { background: #1f1f1f; padding: 20px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #333; }
-    input { background: #0f0f0f; border: 1px solid #555; color: white; padding: 8px; margin-right: 10px; width: 300px; }
-    label { margin-right: 5px; color: #aaa; }
-    
-    /* Mockup Container */
-    .mockup-area { display: flex; gap: 40px; flex-wrap: wrap; }
-    
-    /* --- SIDEBAR STYLE (Suggested Video) --- */
-    .sidebar-item { display: flex; gap: 8px; width: 400px; cursor: pointer; }
-    .sidebar-thumb { position: relative; width: 168px; flex-shrink: 0; }
-    .sidebar-thumb img { width: 100%; border-radius: 8px; display: block; object-fit: cover; aspect-ratio: 16/9; }
-    .time-badge { position: absolute; bottom: 4px; right: 4px; background: rgba(0,0,0,0.8); color: white; font-size: 12px; padding: 1px 4px; border-radius: 4px; font-weight: 500; }
-    .sidebar-meta { display: flex; flex-direction: column; }
-    .sidebar-title { font-size: 14px; font-weight: 500; line-height: 20px; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; max-height: 40px; }
-    .sidebar-channel, .sidebar-stats { font-size: 12px; color: #aaa; line-height: 18px; }
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: #0f0f0f;
+            color: white;
+            font-family: Roboto, Arial, sans-serif;
+            padding: 20px;
+        }
 
-    /* --- HOME STYLE (Large) --- */
-    .home-item { width: 360px; cursor: pointer; }
-    .home-thumb { position: relative; width: 100%; margin-bottom: 12px; }
-    .home-thumb img { width: 100%; border-radius: 12px; display: block; aspect-ratio: 16/9; object-fit: cover; }
-    .home-meta { display: flex; gap: 12px; }
-    .home-avatar { width: 36px; height: 36px; background: #555; border-radius: 50%; flex-shrink: 0; }
-    .home-info { display: flex; flex-direction: column; }
-    .home-title { font-size: 16px; font-weight: 500; line-height: 22px; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .home-stats { font-size: 14px; color: #aaa; }
+        .controls {
+            background: #1f1f1f;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
 
-</style>
+        input {
+            background: #0f0f0f;
+            border: 1px solid #555;
+            color: white;
+            padding: 8px;
+            margin-right: 10px;
+            width: 300px;
+        }
+
+        label {
+            margin-right: 5px;
+            color: #aaa;
+        }
+
+        /* Mockup Container */
+        .mockup-area {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* --- SIDEBAR STYLE (Suggested Video) --- */
+        .sidebar-item {
+            display: flex;
+            gap: 8px;
+            width: 400px;
+            cursor: pointer;
+        }
+
+        .sidebar-thumb {
+            position: relative;
+            width: 168px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-thumb img {
+            width: 100%;
+            border-radius: 8px;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 16/9;
+        }
+
+        .time-badge {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            font-size: 12px;
+            padding: 1px 4px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .sidebar-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-title {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-height: 40px;
+        }
+
+        .sidebar-channel,
+        .sidebar-stats {
+            font-size: 12px;
+            color: #aaa;
+            line-height: 18px;
+        }
+
+        /* --- HOME STYLE (Large) --- */
+        .home-item {
+            width: 360px;
+            cursor: pointer;
+        }
+
+        .home-thumb {
+            position: relative;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .home-thumb img {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .home-meta {
+            display: flex;
+            gap: 12px;
+        }
+
+        .home-avatar {
+            width: 36px;
+            height: 36px;
+            background: #555;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .home-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .home-title {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 22px;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .home-stats {
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="controls">
-    <h3>YouTube Preview Tool (Local)</h3>
-    <label>Title:</label>
-    <input type="text" id="titleInput" value="ComfyUI: Бесплатная генерация без лимитов! Гайд для новичков" oninput="update()">
-    <br><br>
-    <label>Image URL / Path:</label>
-    <input type="text" id="imgInput" placeholder="Paste URL or file path..." oninput="update()">
-    <br><br>
-    <label>Channel Name:</label>
-    <input type="text" id="channelInput" value="Hacker Lifestyle" oninput="update()">
-</div>
-
-<div class="mockup-area">
-    <div>
-        <h4 style="color:#aaa">Suggested / Sidebar (Самое важное для вас)</h4>
-        <div class="sidebar-item">
-            <div class="sidebar-thumb">
-                <img id="sb-img" src="https://via.placeholder.com/1280x720/333/fff?text=THUMBNAIL" alt="">
-                <div class="time-badge">05:10</div>
-            </div>
-            <div class="sidebar-meta">
-                <div class="sidebar-title" id="sb-title">Title goes here...</div>
-                <div class="sidebar-channel" id="sb-channel">Channel Name</div>
-                <div class="sidebar-stats">1.7K views • 2 hours ago</div>
-            </div>
+    <div class="controls">
+        <h3>YouTube Preview Tool (Local)</h3>
+        <label>Title:</label>
+        <input type="text" id="titleInput" value="ComfyUI: Бесплатная генерация без лимитов! Гайд для новичков"
+            oninput="update()">
+        <br><br>
+        <label>Image URL / Path:</label>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <input type="text" id="imgInput" placeholder="Paste URL or file path..." oninput="update()">
+            <button onclick="triggerFile()"
+                style="padding: 8px 16px; background: #333; color: white; border: 1px solid #555; cursor: pointer; border-radius: 4px;">Open
+                File</button>
+            <input type="file" id="fileInput" style="display: none;" accept="image/*" onchange="handleFile(this)">
         </div>
+        <div style="font-size: 12px; color: #777; margin-top: 4px;">Or drag and drop an image anywhere on the page</div>
+        <br>
+        <label>Channel Name:</label>
+        <input type="text" id="channelInput" value="Hacker Lifestyle" oninput="update()">
     </div>
 
-    <div>
-        <h4 style="color:#aaa">Home Page / Search</h4>
-        <div class="home-item">
-            <div class="home-thumb">
-                <img id="hm-img" src="https://via.placeholder.com/1280x720/333/fff?text=THUMBNAIL" alt="">
-                <div class="time-badge" style="bottom: 8px; right: 8px;">05:10</div>
+    <div class="mockup-area">
+        <div>
+            <h4 style="color:#aaa">Suggested / Sidebar (Most important)</h4>
+            <div class="sidebar-item">
+                <div class="sidebar-thumb">
+                    <img id="sb-img" src="https://via.placeholder.com/1280x720/333/fff?text=THUMBNAIL" alt="">
+                    <div class="time-badge">05:10</div>
+                </div>
+                <div class="sidebar-meta">
+                    <div class="sidebar-title" id="sb-title">Title goes here...</div>
+                    <div class="sidebar-channel" id="sb-channel">Channel Name</div>
+                    <div class="sidebar-stats">1.7K views • 2 hours ago</div>
+                </div>
             </div>
-            <div class="home-meta">
-                <div class="home-avatar"></div> <div class="home-info">
-                    <div class="home-title" id="hm-title">Title goes here...</div>
-                    <div class="home-stats">
-                        <span id="hm-channel">Channel Name</span><br>
-                        1.7K views • 2 hours ago
+        </div>
+
+        <div>
+            <h4 style="color:#aaa">Home Page / Search</h4>
+            <div class="home-item">
+                <div class="home-thumb">
+                    <img id="hm-img" src="https://via.placeholder.com/1280x720/333/fff?text=THUMBNAIL" alt="">
+                    <div class="time-badge" style="bottom: 8px; right: 8px;">05:10</div>
+                </div>
+                <div class="home-meta">
+                    <div class="home-avatar"></div>
+                    <div class="home-info">
+                        <div class="home-title" id="hm-title">Title goes here...</div>
+                        <div class="home-stats">
+                            <span id="hm-channel">Channel Name</span><br>
+                            1.7K views • 2 hours ago
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    function update() {
-        const title = document.getElementById('titleInput').value;
-        const img = document.getElementById('imgInput').value;
-        const channel = document.getElementById('channelInput').value;
+    <script>
+        function update() {
+            const title = document.getElementById('titleInput').value;
+            const img = document.getElementById('imgInput').value;
+            const channel = document.getElementById('channelInput').value;
 
-        // Update Sidebar
-        document.getElementById('sb-title').innerText = title;
-        document.getElementById('sb-channel').innerText = channel;
-        if(img) document.getElementById('sb-img').src = img;
+            // Update Sidebar
+            document.getElementById('sb-title').innerText = title;
+            document.getElementById('sb-channel').innerText = channel;
+            if (img) document.getElementById('sb-img').src = img;
 
-        // Update Home
-        document.getElementById('hm-title').innerText = title;
-        document.getElementById('hm-channel').innerText = channel;
-        if(img) document.getElementById('hm-img').src = img;
-    }
-    // Init
-    update();
-</script>
+            // Update Home
+            document.getElementById('hm-title').innerText = title;
+            document.getElementById('hm-channel').innerText = channel;
+            if (img) document.getElementById('hm-img').src = img;
+        }
+
+        // File Input Handling
+        function triggerFile() {
+            document.getElementById('fileInput').click();
+        }
+
+        function handleFile(input) {
+            const file = input.files[0];
+            if (file) {
+                readFile(file);
+            }
+        }
+
+        function readFile(file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imgUrl = e.target.result;
+                document.getElementById('imgInput').value = imgUrl; // Optional: show data URL in input or just use it
+                update();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Drag and Drop Handling
+        const dropZone = document.body; // Allow dropping anywhere on body or specific area
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#fff'; // Visual feedback
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = 'transparent';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = 'transparent';
+
+            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                readFile(e.dataTransfer.files[0]);
+                e.dataTransfer.clearData();
+            }
+        });
+
+        // Init
+        update();
+    </script>
 
 </body>
+
 </html>
