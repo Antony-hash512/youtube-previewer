@@ -181,6 +181,11 @@
         <br>
         <label>Channel Name:</label>
         <input type="text" id="channelInput" value="Hacker's LifeStyle" oninput="update()">
+        <br><br>
+        <div style="display: flex; align-items: center;">
+            <input type="checkbox" id="showHour" checked onchange="update()" style="width: auto; margin-right: 8px;">
+            <label for="showHour" style="cursor: pointer; color: white;">Show Hours</label>
+        </div>
     </div>
 
     <div class="mockup-area">
@@ -225,6 +230,11 @@
             const title = document.getElementById('titleInput').value;
             const img = document.getElementById('imgInput').value;
             const channel = document.getElementById('channelInput').value;
+            const showHour = document.getElementById('showHour').checked;
+
+            // Update Time Badges
+            const timeText = showHour ? "10:05:10" : "05:10";
+            document.querySelectorAll('.time-badge').forEach(el => el.innerText = timeText);
 
             // Update Sidebar
             document.getElementById('sb-title').innerText = title;
