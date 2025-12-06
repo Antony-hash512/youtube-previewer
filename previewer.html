@@ -189,13 +189,19 @@
                 style="flex: 1; min-width: 300px; background: #151515; padding: 10px; border-radius: 6px;">
                 <h4 style="margin-top:0; color: #4caf50;">Slot 1</h4>
                 <label>Title:</label>
-                <input type="text" id="titleInput1" value="Video Title 1" oninput="update(1)"
-                    style="width: 100%; box-sizing: border-box; margin-bottom: 10px;">
+                <div style="display:flex; gap:5px; margin-bottom: 10px;">
+                    <input type="text" id="titleInput1" value="Video Title 1" oninput="update(1)"
+                        style="flex:1; min-width:0; margin-right:0;">
+                    <button onclick="copyTitle(1)" title="Copy to Clipboard"
+                        style="padding: 4px 8px; background: #333; border: 1px solid #555; color: white; cursor: pointer;">Copy</button>
+                    <button onclick="pasteTitle(1)" title="Paste from Clipboard"
+                        style="padding: 4px 8px; background: #333; border: 1px solid #555; color: white; cursor: pointer;">Paste</button>
+                </div>
 
                 <label>Image:</label>
                 <div style="display:flex; gap:5px; margin-bottom: 5px;">
                     <input type="text" id="imgInput1" placeholder="URL or drop file..." oninput="update(1)"
-                        style="flex:1; min-width:0;">
+                        style="flex:1; min-width:0; margin-right:0;">
                     <button onclick="triggerFile(1)"
                         style="padding: 4px 8px; background: #333; border: 1px solid #555; color: white; cursor: pointer;">Open</button>
                 </div>
@@ -212,13 +218,19 @@
                 style="flex: 1; min-width: 300px; background: #151515; padding: 10px; border-radius: 6px;">
                 <h4 style="margin-top:0; color: #2196f3;">Slot 2</h4>
                 <label>Title:</label>
-                <input type="text" id="titleInput2" value="Video Title 2" oninput="update(2)"
-                    style="width: 100%; box-sizing: border-box; margin-bottom: 10px;">
+                <div style="display:flex; gap:5px; margin-bottom: 10px;">
+                    <input type="text" id="titleInput2" value="Video Title 2" oninput="update(2)"
+                        style="flex:1; min-width:0; margin-right:0;">
+                    <button onclick="copyTitle(2)" title="Copy to Clipboard"
+                        style="padding: 4px 8px; background: #333; border: 1px solid #555; color: white; cursor: pointer;">Copy</button>
+                    <button onclick="pasteTitle(2)" title="Paste from Clipboard"
+                        style="padding: 4px 8px; background: #333; border: 1px solid #555; color: white; cursor: pointer;">Paste</button>
+                </div>
 
                 <label>Image:</label>
                 <div style="display:flex; gap:5px; margin-bottom: 5px;">
                     <input type="text" id="imgInput2" placeholder="URL or drop file..." oninput="update(2)"
-                        style="flex:1; min-width:0;">
+                        style="flex:1; min-width:0; margin-right:0;">
                     <button onclick="triggerFile(2)"
                         style="padding: 4px 8px; background: #333; border: 1px solid #555; color: white; cursor: pointer;">Open</button>
                 </div>
@@ -235,13 +247,19 @@
                 style="flex: 1; min-width: 300px; background: #151515; padding: 10px; border-radius: 6px;">
                 <h4 style="margin-top:0; color: #e91e63;">Slot 3</h4>
                 <label>Title:</label>
-                <input type="text" id="titleInput3" value="Video Title 3" oninput="update(3)"
-                    style="width: 100%; box-sizing: border-box; margin-bottom: 10px;">
+                <div style="display:flex; gap:5px; margin-bottom: 10px;">
+                    <input type="text" id="titleInput3" value="Video Title 3" oninput="update(3)"
+                        style="flex:1; min-width:0; margin-right:0;">
+                    <button onclick="copyTitle(3)" title="Copy to Clipboard"
+                        style="padding: 4px 8px; background: #333; border: 1px solid #555; color: white; cursor: pointer;">Copy</button>
+                    <button onclick="pasteTitle(3)" title="Paste from Clipboard"
+                        style="padding: 4px 8px; background: #333; border: 1px solid #555; color: white; cursor: pointer;">Paste</button>
+                </div>
 
                 <label>Image:</label>
                 <div style="display:flex; gap:5px; margin-bottom: 5px;">
                     <input type="text" id="imgInput3" placeholder="URL or drop file..." oninput="update(3)"
-                        style="flex:1; min-width:0;">
+                        style="flex:1; min-width:0; margin-right:0;">
                     <button onclick="triggerFile(3)"
                         style="padding: 4px 8px; background: #333; border: 1px solid #555; color: white; cursor: pointer;">Open</button>
                 </div>
@@ -461,6 +479,32 @@
         setupDropZone(2);
         setupDropZone(3);
 
+        // Clipboard Handling
+        function copyTitle(slot) {
+            const input = document.getElementById(`titleInput${slot}`);
+            if (input) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    // Optional: visuals
+                    // alert('Copied!');
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            }
+        }
+
+        async function pasteTitle(slot) {
+            try {
+                const text = await navigator.clipboard.readText();
+                const input = document.getElementById(`titleInput${slot}`);
+                if (input) {
+                    input.value = text;
+                    update(slot);
+                }
+            } catch (err) {
+                console.error('Failed to paste: ', err);
+            }
+        }
+
         // Init
         updateAll();
     </script>
@@ -468,3 +512,4 @@
 </body>
 
 </html>
+```
