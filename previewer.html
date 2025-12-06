@@ -165,59 +165,194 @@
 
     <div class="controls">
         <h3>YouTube Preview Tool (Local)</h3>
-        <label>Title:</label>
-        <input type="text" id="titleInput" value="ComfyUI: Бесплатная генерация без лимитов! Гайд для новичков"
-            oninput="update()">
-        <br><br>
-        <label>Image URL / Path:</label>
-        <div style="display:flex; gap:10px; align-items:center;">
-            <input type="text" id="imgInput" placeholder="Paste URL or file path..." oninput="update()">
-            <button onclick="triggerFile()"
-                style="padding: 8px 16px; background: #333; color: white; border: 1px solid #555; cursor: pointer; border-radius: 4px;">Open
-                File</button>
-            <input type="file" id="fileInput" style="display: none;" accept="image/*" onchange="handleFile(this)">
-        </div>
-        <div style="font-size: 12px; color: #777; margin-top: 4px;">Or drag and drop an image anywhere on the page</div>
-        <br>
-        <label>Channel Name:</label>
-        <input type="text" id="channelInput" value="Hacker's LifeStyle" oninput="update()">
-        <br><br>
-        <div style="display: flex; align-items: center;">
-            <input type="checkbox" id="showHour" checked onchange="update()" style="width: auto; margin-right: 8px;">
-            <label for="showHour" style="cursor: pointer; color: white;">Show Hours</label>
-        </div>
-    </div>
 
-    <div class="mockup-area">
-        <div>
-            <h4 style="color:#aaa">Suggested / Sidebar (Most important)</h4>
-            <div class="sidebar-item">
-                <div class="sidebar-thumb">
-                    <img id="sb-img" src="https://via.placeholder.com/1280x720/333/fff?text=THUMBNAIL" alt="">
-                    <div class="time-badge">10:05:10</div>
+        <!-- Global Controls -->
+        <div style="margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px;">
+            <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                <div>
+                    <label>Channel Name (Shared):</label>
+                    <input type="text" id="channelInput" value="Hacker's LifeStyle" oninput="updateAll()"
+                        style="width: 200px;">
                 </div>
-                <div class="sidebar-meta">
-                    <div class="sidebar-title" id="sb-title">Title goes here...</div>
-                    <div class="sidebar-channel" id="sb-channel">Channel Name</div>
-                    <div class="sidebar-stats">1.7K views • 2 hours ago</div>
+                <div style="display: flex; align-items: center;">
+                    <input type="checkbox" id="showHour" checked onchange="updateAll()"
+                        style="width: auto; margin-right: 8px;">
+                    <label for="showHour" style="cursor: pointer; color: white;">Show Hour (10:05:10)</label>
                 </div>
             </div>
         </div>
 
-        <div>
-            <h4 style="color:#aaa">Home Page / Search</h4>
-            <div class="home-item">
+        <!-- Slots Container -->
+        <div style="display: flex; gap: 20px; overflow-x: auto;">
+            <!-- Slot 1 -->
+            <div class="slot-control" id="slot1"
+                style="flex: 1; min-width: 300px; background: #151515; padding: 10px; border-radius: 6px;">
+                <h4 style="margin-top:0; color: #4caf50;">Slot 1</h4>
+                <label>Title:</label>
+                <input type="text" id="titleInput1" value="Video Title 1" oninput="update(1)"
+                    style="width: 100%; box-sizing: border-box; margin-bottom: 10px;">
+
+                <label>Image:</label>
+                <div style="display:flex; gap:5px; margin-bottom: 5px;">
+                    <input type="text" id="imgInput1" placeholder="URL or drop file..." oninput="update(1)"
+                        style="flex:1; min-width:0;">
+                    <button onclick="triggerFile(1)"
+                        style="padding: 4px 8px; background: #333; border: 1px solid #555; color: white; cursor: pointer;">Open</button>
+                </div>
+                <input type="file" id="fileInput1" style="display: none;" accept="image/*"
+                    onchange="handleFile(this, 1)">
+                <div class="drop-zone" id="dropZone1"
+                    style="border: 2px dashed #333; padding: 10px; text-align: center; color: #777; font-size: 12px; border-radius: 4px;">
+                    Drop Image Here
+                </div>
+            </div>
+
+            <!-- Slot 2 -->
+            <div class="slot-control" id="slot2"
+                style="flex: 1; min-width: 300px; background: #151515; padding: 10px; border-radius: 6px;">
+                <h4 style="margin-top:0; color: #2196f3;">Slot 2</h4>
+                <label>Title:</label>
+                <input type="text" id="titleInput2" value="Video Title 2" oninput="update(2)"
+                    style="width: 100%; box-sizing: border-box; margin-bottom: 10px;">
+
+                <label>Image:</label>
+                <div style="display:flex; gap:5px; margin-bottom: 5px;">
+                    <input type="text" id="imgInput2" placeholder="URL or drop file..." oninput="update(2)"
+                        style="flex:1; min-width:0;">
+                    <button onclick="triggerFile(2)"
+                        style="padding: 4px 8px; background: #333; border: 1px solid #555; color: white; cursor: pointer;">Open</button>
+                </div>
+                <input type="file" id="fileInput2" style="display: none;" accept="image/*"
+                    onchange="handleFile(this, 2)">
+                <div class="drop-zone" id="dropZone2"
+                    style="border: 2px dashed #333; padding: 10px; text-align: center; color: #777; font-size: 12px; border-radius: 4px;">
+                    Drop Image Here
+                </div>
+            </div>
+
+            <!-- Slot 3 -->
+            <div class="slot-control" id="slot3"
+                style="flex: 1; min-width: 300px; background: #151515; padding: 10px; border-radius: 6px;">
+                <h4 style="margin-top:0; color: #e91e63;">Slot 3</h4>
+                <label>Title:</label>
+                <input type="text" id="titleInput3" value="Video Title 3" oninput="update(3)"
+                    style="width: 100%; box-sizing: border-box; margin-bottom: 10px;">
+
+                <label>Image:</label>
+                <div style="display:flex; gap:5px; margin-bottom: 5px;">
+                    <input type="text" id="imgInput3" placeholder="URL or drop file..." oninput="update(3)"
+                        style="flex:1; min-width:0;">
+                    <button onclick="triggerFile(3)"
+                        style="padding: 4px 8px; background: #333; border: 1px solid #555; color: white; cursor: pointer;">Open</button>
+                </div>
+                <input type="file" id="fileInput3" style="display: none;" accept="image/*"
+                    onchange="handleFile(this, 3)">
+                <div class="drop-zone" id="dropZone3"
+                    style="border: 2px dashed #333; padding: 10px; text-align: center; color: #777; font-size: 12px; border-radius: 4px;">
+                    Drop Image Here
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mockup-area">
+        <!-- Sidebar Column -->
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+            <h4 style="color:#aaa; margin-bottom: 10px;">Suggested / Sidebar</h4>
+
+            <!-- Sidebar Item 1 -->
+            <div class="sidebar-item" style="border-left: 3px solid #4caf50; padding-left: 8px;">
+                <div class="sidebar-thumb">
+                    <img id="sb-img-1" src="https://via.placeholder.com/1280x720/333/fff?text=SLOT+1" alt="">
+                    <div class="time-badge">10:05:10</div>
+                </div>
+                <div class="sidebar-meta">
+                    <div class="sidebar-title" id="sb-title-1">Title 1</div>
+                    <div class="sidebar-channel channel-name">Channel Name</div>
+                    <div class="sidebar-stats">1.7K views • 2 hours ago</div>
+                </div>
+            </div>
+
+            <!-- Sidebar Item 2 -->
+            <div class="sidebar-item" style="border-left: 3px solid #2196f3; padding-left: 8px;">
+                <div class="sidebar-thumb">
+                    <img id="sb-img-2" src="https://via.placeholder.com/1280x720/333/fff?text=SLOT+2" alt="">
+                    <div class="time-badge">10:05:10</div>
+                </div>
+                <div class="sidebar-meta">
+                    <div class="sidebar-title" id="sb-title-2">Title 2</div>
+                    <div class="sidebar-channel channel-name">Channel Name</div>
+                    <div class="sidebar-stats">2.5K views • 5 hours ago</div>
+                </div>
+            </div>
+
+            <!-- Sidebar Item 3 -->
+            <div class="sidebar-item" style="border-left: 3px solid #e91e63; padding-left: 8px;">
+                <div class="sidebar-thumb">
+                    <img id="sb-img-3" src="https://via.placeholder.com/1280x720/333/fff?text=SLOT+3" alt="">
+                    <div class="time-badge">10:05:10</div>
+                </div>
+                <div class="sidebar-meta">
+                    <div class="sidebar-title" id="sb-title-3">Title 3</div>
+                    <div class="sidebar-channel channel-name">Channel Name</div>
+                    <div class="sidebar-stats">10K views • 1 day ago</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home Column -->
+        <div style="display: flex; flex-direction: column; gap: 40px;">
+            <h4 style="color:#aaa; margin-bottom: 10px;">Home Page / Search</h4>
+
+            <!-- Home Item 1 -->
+            <div class="home-item" style="border-left: 3px solid #4caf50; padding-left: 12px;">
                 <div class="home-thumb">
-                    <img id="hm-img" src="https://via.placeholder.com/1280x720/333/fff?text=THUMBNAIL" alt="">
+                    <img id="hm-img-1" src="https://via.placeholder.com/1280x720/333/fff?text=SLOT+1" alt="">
                     <div class="time-badge" style="bottom: 8px; right: 8px;">10:05:10</div>
                 </div>
                 <div class="home-meta">
                     <div class="home-avatar"></div>
                     <div class="home-info">
-                        <div class="home-title" id="hm-title">Title goes here...</div>
+                        <div class="home-title" id="hm-title-1">Title 1</div>
                         <div class="home-stats">
-                            <span id="hm-channel">Channel Name</span><br>
+                            <span class="channel-name">Channel Name</span><br>
                             1.7K views • 2 hours ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Item 2 -->
+            <div class="home-item" style="border-left: 3px solid #2196f3; padding-left: 12px;">
+                <div class="home-thumb">
+                    <img id="hm-img-2" src="https://via.placeholder.com/1280x720/333/fff?text=SLOT+2" alt="">
+                    <div class="time-badge" style="bottom: 8px; right: 8px;">10:05:10</div>
+                </div>
+                <div class="home-meta">
+                    <div class="home-avatar"></div>
+                    <div class="home-info">
+                        <div class="home-title" id="hm-title-2">Title 2</div>
+                        <div class="home-stats">
+                            <span class="channel-name">Channel Name</span><br>
+                            2.5K views • 5 hours ago
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Item 3 -->
+            <div class="home-item" style="border-left: 3px solid #e91e63; padding-left: 12px;">
+                <div class="home-thumb">
+                    <img id="hm-img-3" src="https://via.placeholder.com/1280x720/333/fff?text=SLOT+3" alt="">
+                    <div class="time-badge" style="bottom: 8px; right: 8px;">10:05:10</div>
+                </div>
+                <div class="home-meta">
+                    <div class="home-avatar"></div>
+                    <div class="home-info">
+                        <div class="home-title" id="hm-title-3">Title 3</div>
+                        <div class="home-stats">
+                            <span class="channel-name">Channel Name</span><br>
+                            10K views • 1 day ago
                         </div>
                     </div>
                 </div>
@@ -226,74 +361,94 @@
     </div>
 
     <script>
-        function update() {
-            const title = document.getElementById('titleInput').value;
-            const img = document.getElementById('imgInput').value;
+        function update(slot) {
+            if (!slot) return;
+
+            const title = document.getElementById(`titleInput${slot}`).value;
+            const img = document.getElementById(`imgInput${slot}`).value;
             const channel = document.getElementById('channelInput').value;
             const showHour = document.getElementById('showHour').checked;
 
-            // Update Time Badges
+            // Update Time Badges (All)
             const timeText = showHour ? "10:05:10" : "05:10";
             document.querySelectorAll('.time-badge').forEach(el => el.innerText = timeText);
 
-            // Update Sidebar
-            document.getElementById('sb-title').innerText = title;
-            document.getElementById('sb-channel').innerText = channel;
-            if (img) document.getElementById('sb-img').src = img;
+            // Update Channel Names (All)
+            document.querySelectorAll('.channel-name').forEach(el => el.innerText = channel);
 
-            // Update Home
-            document.getElementById('hm-title').innerText = title;
-            document.getElementById('hm-channel').innerText = channel;
-            if (img) document.getElementById('hm-img').src = img;
+            // Update Slot Specifics
+            document.getElementById(`sb-title-${slot}`).innerText = title;
+            if (img) document.getElementById(`sb-img-${slot}`).src = img;
+
+            document.getElementById(`hm-title-${slot}`).innerText = title;
+            if (img) document.getElementById(`hm-img-${slot}`).src = img;
+        }
+
+        function updateAll() {
+            update(1);
+            update(2);
+            update(3);
         }
 
         // File Input Handling
-        function triggerFile() {
-            document.getElementById('fileInput').click();
+        function triggerFile(slot) {
+            document.getElementById(`fileInput${slot}`).click();
         }
 
-        function handleFile(input) {
+        function handleFile(input, slot) {
             const file = input.files[0];
             if (file) {
-                readFile(file);
+                readFile(file, slot);
             }
         }
 
-        function readFile(file) {
+        function readFile(file, slot) {
             const reader = new FileReader();
             reader.onload = function (e) {
                 const imgUrl = e.target.result;
-                document.getElementById('imgInput').value = imgUrl; // Optional: show data URL in input or just use it
-                update();
+                document.getElementById(`imgInput${slot}`).value = imgUrl;
+                update(slot);
             };
             reader.readAsDataURL(file);
         }
 
-        // Drag and Drop Handling
-        const dropZone = document.body; // Allow dropping anywhere on body or specific area
+        // Drag and Drop Handling per slot
+        function setupDropZone(slot) {
+            const dropZone = document.getElementById(`dropZone${slot}`);
 
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.style.borderColor = '#fff'; // Visual feedback
-        });
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.style.borderColor = '#fff';
+                dropZone.style.background = '#333';
+            });
 
-        dropZone.addEventListener('dragleave', (e) => {
-            e.preventDefault();
-            dropZone.style.borderColor = 'transparent';
-        });
+            dropZone.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                dropZone.style.borderColor = '#333';
+                dropZone.style.background = 'transparent';
+            });
 
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.style.borderColor = 'transparent';
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.style.borderColor = '#333';
+                dropZone.style.background = 'transparent';
 
-            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-                readFile(e.dataTransfer.files[0]);
-                e.dataTransfer.clearData();
-            }
-        });
+                if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                    readFile(e.dataTransfer.files[0], slot);
+                    e.dataTransfer.clearData();
+                }
+            });
+        }
+
+        // Setup global drag (defaults to focused or just ignored? Let's just do individual drop zones for safety)
+        // Or we can allow dropping on the slot-control div itself
+
+        setupDropZone(1);
+        setupDropZone(2);
+        setupDropZone(3);
 
         // Init
-        update();
+        updateAll();
     </script>
 
 </body>
