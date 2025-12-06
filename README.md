@@ -13,7 +13,7 @@ A simple local tool to preview how your video title and thumbnail will look on Y
 - **Copy/Paste**: Quickly copy titles between slots using dedicated buttons.
 
 ## How to Use
-1. Open `previewer.html` in your browser.
+1. Open `previewer.html` in any modern web browser.
 2. **Shared Controls**: Set the **Channel Name** and **Time Format** at the top (applies to all slots).
 3. **Slots 1, 2, 3**:
     - Enter a unique **Title** for each slot.
