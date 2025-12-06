@@ -179,6 +179,11 @@
                         style="width: auto; margin-right: 8px;">
                     <label for="showHour" style="cursor: pointer; color: white;">Show Hours</label>
                 </div>
+                <div style="display: flex; align-items: center;">
+                    <input type="checkbox" id="homeLayout" checked onchange="updateLayout()"
+                        style="width: auto; margin-right: 8px;">
+                    <label for="homeLayout" style="cursor: pointer; color: white;">Row Layout (Home)</label>
+                </div>
             </div>
         </div>
 
@@ -328,7 +333,7 @@
         <div>
             <h4 style="color:#aaa; margin-bottom: 10px;">Home Page / Search</h4>
 
-            <div style="display: flex; flex-direction: row; gap: 20px; flex-wrap: wrap;">
+            <div id="homeContainer" style="display: flex; flex-direction: row; gap: 20px; flex-wrap: wrap;">
                 <!-- Home Item 1 -->
                 <div style="border-left: 3px solid #4caf50; padding-left: 12px;">
                     <div class="home-item">
@@ -420,6 +425,13 @@
             update(1);
             update(2);
             update(3);
+            updateLayout();
+        }
+
+        function updateLayout() {
+            const isRow = document.getElementById('homeLayout').checked;
+            const container = document.getElementById('homeContainer');
+            container.style.flexDirection = isRow ? 'row' : 'column';
         }
 
         // File Input Handling
